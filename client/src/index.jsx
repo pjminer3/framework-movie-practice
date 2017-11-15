@@ -14,13 +14,42 @@ var movies = [
 class MovieList extends React.Component {
   constructor() {
     super();
+
+    this.state = {
+      movies: [
+        {title: 'Mean Girls'},
+        {title: 'Hackers'},
+        {title: 'The Grey'},
+        {title: 'Sunshine'},
+        {title: 'Ex Machina'},
+      ],
+      searchVal: ''
+    }
+  }
+
+  onClickSearch (event) {
+    let searchVal = this.state.searchVal;
+
+    let newVids = this.state.movies.filter( movie => {
+      return movie.title.toLowerCase().includes(this.state.searchVal.toLowerCase());
+    });
+    this.setState({movies: newVids});
+  }
+
+  onChangeValChange (event) {
+    this.setState({searchVal: event.target.value});
   }
 
   render() {
     return (
       <div>
-        <Search />
-        {movies.map( (movie, index) => {
+        <Search 
+          onClickSearch={this.onClickSearch.bind(this)} 
+          searchVal={this.state.searchVal}
+          onChangeValChange={this.onChangeValChange.bind(this)}
+        />
+        <br/>
+        {this.state.movies.map( (movie, index) => {
           return <Movie movie={movie} key={index} />
         })}
       </div>

@@ -4,7 +4,11 @@ const Search = (props) => {
   return (
     <div>
       <h4>Search Movies:</h4>
-      <input />
+      <input 
+        onChange={props.onChangeValChange} 
+        value={props.searchVal}
+      /> 
+      <button onClick={props.onClickSearch}>Submit</button>
     </div>
   )
 }
