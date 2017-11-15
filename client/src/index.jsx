@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM  from 'react-dom';
-import Movie from './components/movie.jsx';
+import Movie from './components/Movie.jsx';
+import Search from './components/Search.jsx';
 
 var movies = [
   {title: 'Mean Girls'},
@@ -18,7 +19,7 @@ class MovieList extends React.Component {
   render() {
     return (
       <div>
-        {console.log(movies)}
+        <Search />
         {movies.map( (movie, index) => {
           return <Movie movie={movie} key={index} />
         })}
