@@ -5,7 +5,7 @@ const Search = (props) => {
     <div>
       <h4>Search Movies:</h4>
       <input 
-        onChange={props.onChangeValChange} 
+        onChange={props.onChangeSearchValChange} 
         value={props.searchVal}
       /> 
       <button onClick={props.onClickSearch}>Submit</button>
