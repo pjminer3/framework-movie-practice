@@ -3,6 +3,7 @@ import ReactDOM  from 'react-dom';
 import Movie from './components/Movie.jsx';
 import Search from './components/Search.jsx';
 import AddMovie from './components/AddMovie.jsx';
+import $ from 'jquery';
 
 class MovieList extends React.Component {
   constructor() {
@@ -10,15 +11,33 @@ class MovieList extends React.Component {
 
     this.state = {
       movies: [
-        {title: 'Mean Girls', watched: 'false'},
-        {title: 'Hackers', watched: 'false'},
-        {title: 'The Grey', watched: 'false'},
-        {title: 'Sunshine', watched: 'false'},
-        {title: 'Ex Machina', watched: 'false'},
+        // {title: 'Mean Girls', watched: 'false'},
+        // {title: 'Hackers', watched: 'false'},
+        // {title: 'The Grey', watched: 'false'},
+        // {title: 'Sunshine', watched: 'false'},
+        // {title: 'Ex Machina', watched: 'false'},
       ],
       searchVal: '',
       addVal: ''
     }
+  }
+
+  componentDidMount() {
+    // submit ajax get request
+    $.ajax({
+      url: '/movies',
+      method: 'GET',
+      success: function(data) {
+        //upon successfull get request, return data
+        console.log('Data fetch was successful: ', data);
+        return data;
+      },
+      error: function(err) {
+        console.log('There was an error fetching data: ', err);
+      }
+    }).then( movieData => {
+      this.setState({movies: movieData});
+    })
   }
 
   // ------- ON-CLICK FUNCTIONS -------
@@ -42,8 +61,10 @@ class MovieList extends React.Component {
     this.setState({searchVal: ''});
   }
 
-  onClickToggleWatched (index) {
-    console.log('Toggle watch triggered!', index);
+  onClickToggleWatched (event) {
+    let watchedList = this.state.movie.filter( movie => {
+      // COME BACK TO HERE! THIS IS NOT SO IMPORTANT!
+    })
   }
 
 

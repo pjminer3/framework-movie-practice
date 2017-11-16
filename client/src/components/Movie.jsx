@@ -20,8 +20,7 @@ class Movie extends React.Component {
                     {this.state.watched ? 
                     <button 
                         onClick={() => {
-                            this.onClickMovieWatched.bind(this)()
-                            this.props.onClickToggleWatched(this.props.key)}}> Movie Watched!
+                            this.onClickMovieWatched.bind(this)()}}> Movie Watched!
                     </button> : 
                     <button 
                         onClick={() => {
