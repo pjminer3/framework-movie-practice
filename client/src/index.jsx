@@ -10,11 +10,11 @@ class MovieList extends React.Component {
 
     this.state = {
       movies: [
-        {title: 'Mean Girls'},
-        {title: 'Hackers'},
-        {title: 'The Grey'},
-        {title: 'Sunshine'},
-        {title: 'Ex Machina'},
+        {title: 'Mean Girls', watched: 'false'},
+        {title: 'Hackers', watched: 'false'},
+        {title: 'The Grey', watched: 'false'},
+        {title: 'Sunshine', watched: 'false'},
+        {title: 'Ex Machina', watched: 'false'},
       ],
       searchVal: '',
       addVal: ''
@@ -25,7 +25,7 @@ class MovieList extends React.Component {
   // adds a movie to the list when it's clicked
   onClickAddMovie (event) {
     let newVids = this.state.movies;
-    newVids.push({title: this.state.addVal});
+    newVids.push({title: this.state.addVal, watched: 'false'});
     this.setState({movies: newVids});
     this.setState({addVal: ''});
   }
@@ -40,6 +40,10 @@ class MovieList extends React.Component {
 
     this.setState({movies: newVids});
     this.setState({searchVal: ''});
+  }
+
+  onClickToggleWatched (index) {
+    console.log('Toggle watch triggered!', index);
   }
 
 
@@ -67,13 +71,17 @@ class MovieList extends React.Component {
           onClickAddMovie={this.onClickAddMovie.bind(this)}
         />
         <br/>
+        <div className='buttons'>
+          <button className='watched'>Watched</button>
+          <button className='toWatch'>To Watch</button>
+        </div>
 
         {this.state.movies.length === 0 ? 
         // If no movies in search results send message
         <div> No movies available. Please try again </div> : 
         // else render movies
         this.state.movies.map( (movie, index) => {
-          return <Movie movie={movie} key={index} />
+          return <Movie movie={movie} key={index}  onClickToggleWatched={this.onClickToggleWatched.bind(this)}/>
         })}
       </div>
     )
@@ -81,4 +89,3 @@ class MovieList extends React.Component {
 }
 
 ReactDOM.render( <MovieList />, document.getElementById('app'));
-// TODO : kill it

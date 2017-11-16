@@ -17,7 +17,17 @@ class Movie extends React.Component {
             <div className='movie'>
                 <div>{this.props.movie.title}</div>
                     {/* Conditional Rendering of Buttons */}
-                    {this.state.watched ? <button onClick={this.onClickMovieWatched.bind(this)}>Movie Watched!</button> : <button onClick={this.onClickMovieWatched.bind(this)}>Watched?</button>}
+                    {this.state.watched ? 
+                    <button 
+                        onClick={() => {
+                            this.onClickMovieWatched.bind(this)()
+                            this.props.onClickToggleWatched(this.props.key)}}> Movie Watched!
+                    </button> : 
+                    <button 
+                        onClick={() => {
+                            this.onClickMovieWatched.bind(this)()
+                            this.props.onClickToggleWatched(this.props.key)}}>Watched?
+                    </button>}
             </div>
         )
     }
