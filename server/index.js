@@ -18,3 +18,7 @@ app.get('/movies', function(req, res) {
   res.send(movies);
 });
 
+app.post('/movie', function(req, res, body) {
+  res.send(body);
+})
+

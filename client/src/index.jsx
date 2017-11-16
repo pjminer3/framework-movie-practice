@@ -34,8 +34,9 @@ class MovieList extends React.Component {
       },
       error: function(err) {
         console.log('There was an error fetching data: ', err);
-      }
+      },
     }).then( movieData => {
+      // after returning movie data from ajax call, setState with that movie data
       this.setState({movies: movieData});
     })
   }
@@ -44,7 +45,23 @@ class MovieList extends React.Component {
   // adds a movie to the list when it's clicked
   onClickAddMovie (event) {
     let newVids = this.state.movies;
-    newVids.push({title: this.state.addVal, watched: 'false'});
+    let newMovie = this.state.addVal;
+
+    // send ajax post request with the movie data
+    $.ajax({
+      url: '/movie',
+      method: 'POST',
+      data: JSON.stringify({movieName: newMovie}),
+      success: function(data) {
+        console.log('POST WAS SUCCESSFUL: ', data);
+      },
+      error: function(err) {
+        console.log('There was an error: ', err);
+      }
+    })
+    // in the respose callback set the new state with the movie
+
+    newVids.push({title: newMovie, watched: 'false'});
     this.setState({movies: newVids});
     this.setState({addVal: ''});
   }
