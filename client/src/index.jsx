@@ -51,19 +51,24 @@ class MovieList extends React.Component {
     $.ajax({
       url: '/movie',
       method: 'POST',
-      data: JSON.stringify({movieName: newMovie}),
-      success: function(data) {
-        console.log('POST WAS SUCCESSFUL: ', data);
+      // ran into bug here; cannot forget to use 'application/json'
+      contentType: 'application/json',
+      data: JSON.stringify({movieName: newMovie}), // stringify the entire object
+      success: function(movieName) {
+        console.log('POST WAS SUCCESSFUL: ', movieName);
+        return movieName;
       },
       error: function(err) {
         console.log('There was an error: ', err);
       }
+    }).then( movieName => {
+      // once the movie is sent back from the server (aka it posted correctly)
+      newVids.push({title: newMovie, watched: 'false'});
+      this.setState({movies: newVids});
+      this.setState({addVal: ''});
     })
     // in the respose callback set the new state with the movie
 
-    newVids.push({title: newMovie, watched: 'false'});
-    this.setState({movies: newVids});
-    this.setState({addVal: ''});
   }
 
   // searches for a specific string when clicked

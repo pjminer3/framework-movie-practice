@@ -18,7 +18,10 @@ app.get('/movies', function(req, res) {
   res.send(movies);
 });
 
-app.post('/movie', function(req, res, body) {
-  res.send(body);
+app.post('/movie', function(req, res) {
+  console.log('req: ', req);
+  console.log('res: ', res);
+  console.log('req.body: ', res.body);
+  res.end(req.body.movieName);
 })
 
