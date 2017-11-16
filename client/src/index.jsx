@@ -33,6 +33,7 @@ class MovieList extends React.Component {
     let newVids = this.state.movies.filter( movie => {
       return movie.title.toLowerCase().includes(this.state.searchVal.toLowerCase());
     });
+
     this.setState({movies: newVids});
   }
 
@@ -49,7 +50,11 @@ class MovieList extends React.Component {
           onChangeValChange={this.onChangeValChange.bind(this)}
         />
         <br/>
-        {this.state.movies.map( (movie, index) => {
+        {this.state.movies.length === 0 ? 
+        // If no movies in search results send message
+        <div> No movies available. Please try again </div> : 
+        // else render movies
+        this.state.movies.map( (movie, index) => {
           return <Movie movie={movie} key={index} />
         })}
       </div>
