@@ -1,10 +1,39 @@
 import React from 'react';
 
-const Movie = ({movie}) => {
-    return (
-        <div>{movie.title}</div>
-    )
+class Movie extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            watched: false
+        }
+    }
+
+    onClickMovieWatched (event) {
+        this.setState({watched: !this.state.watched});
+    }
+
+    render () {
+        return (
+            <div className='movie'>
+                <div>{this.props.movie.title}</div>
+                    {/* Conditional Rendering of Buttons */}
+                    {this.state.watched ? <button onClick={this.onClickMovieWatched.bind(this)}>Movie Watched!</button> : <button onClick={this.onClickMovieWatched.bind(this)}>Watched?</button>}
+            </div>
+        )
+    }
 }
+
+// const Movie = ({movie}) => {
+//     return (
+//         <div className='movie'>
+//             <div>{movie.title}</div>
+//             <div className='buttons'>
+//                 <button></button>
+//             </div>
+//         </div>
+        
+//     )
+// }
 
 
 export default Movie;
