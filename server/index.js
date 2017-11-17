@@ -17,7 +17,10 @@ app.listen(3000, function () { console.log('MovieList app listening on port 3000
 // use app.get to the end path to send movies in the response object
 app.get('/movies', function(req, res) {
   console.log(movieAPI.hi());
-  res.send(movies);
+  movieAPI.getMovies(function(movies) {
+    res.send(movies);
+  });
+  // res.send(movies);
 });
 
 app.post('/movie', function(req, res) {
