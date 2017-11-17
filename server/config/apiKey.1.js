@@ -1,0 +1,1 @@
+window.APIKEY = 'add api key here';
