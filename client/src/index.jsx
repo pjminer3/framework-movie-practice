@@ -63,7 +63,7 @@ class MovieList extends React.Component {
       }
     }).then( movieName => {
       // once the movie is sent back from the server (aka it posted correctly)
-      newVids.push({title: newMovie, watched: 'false'});
+      newVids.push({title: movieName, watched: 'false'});
       this.setState({movies: newVids});
       this.setState({addVal: ''});
     })

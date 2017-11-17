@@ -19,9 +19,16 @@ app.get('/movies', function(req, res) {
 });
 
 app.post('/movie', function(req, res) {
-  console.log('req: ', req);
-  console.log('res: ', res);
-  console.log('req.body: ', res.body);
-  res.end(req.body.movieName);
+  let movieName = req.body.movieName;
+  let wordsArr = movieName.split(' ');
+  console.log('before caps: ', wordsArr); 
+  wordsArr = wordsArr.map(word => {
+    word = word.split('');
+    word[0] = word[0].toUpperCase();
+    return word.join('');
+  });
+  console.log('after caps: ', wordsArr);
+  movieName = wordsArr.join(' ');
+  res.end(movieName);
 })
 
